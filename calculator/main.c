@@ -1,24 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <ctype.h>
-
+#include "calc.h"
 
 #define MAXOP 100
-#define NUMBER '0'
-#define BUFERSIZE 100
-#define MAXVAL 100
-
-
-void push(double f);
-double pop(void);
-int getop (char []);
-int getch (void);
-void ungetch (int);
-
-int sp = 0;
-double val[MAXVAL];
-char buf[BUFERSIZE];
-int bufp = 0;
 
 int main ()
 {
@@ -56,39 +40,4 @@ int main ()
         }
     }
     return 0;
-}
-
-int getop (char s[])
-{
-    int i, c;
-    
-    while ((s[0] = c = getch()) == ' ' || c == '\t')
-        ;
-    s[1] = '\0';
-    if (!isdigit(c) && c != '.')
-        return c;
-    i = 0;
-    if (isdigit(c))
-        while (isdigit(s[++i] = c = getch()))
-            ;
-    if (c == '.')
-        while (isdigit(s[++i] = c = getch()))
-            ;
-    s[i] = '\0';
-    if (c != EOF)
-        ungetch(c);
-    return NUMBER;
-}
-
-int getch (void)
-{
-    return (bufp > 0) ? buf[--bufp] : getchar();
-}
-
-void ungetch (int c)
-{
-    if (bufp >= BUFERSIZE)
-        printf("Буфер переполнен\n");
-    else
-        buf[bufp++] = c;
 }

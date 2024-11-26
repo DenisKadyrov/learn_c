@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include "calc.h"
 
 #define MAXVAL 100
 
 
-extern int sp;
-extern double val[];
+int sp = 0;
+double val[MAXVAL];
 
 void push (double f)
 {
