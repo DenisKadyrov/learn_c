@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
 
-double atof (char[]);
 
 double atof (char s[])
 {
