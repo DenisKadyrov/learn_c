@@ -2,8 +2,8 @@
 #define BUFERSIZE 100
 
 
-char buf[BUFERSIZE];
-int bufp = 0;
+static char buf[BUFERSIZE];
+static int bufp = 0;
 
 
 int getch (void)
