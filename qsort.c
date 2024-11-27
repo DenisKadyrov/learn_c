@@ -17,26 +17,26 @@ int main(void)
 void qsort(int v[], int left, int right)
 {
     int i, last;
-    void swap(int v[], int i, int j);
+    void swap(int *, int *);
     
     if (left >= right)
         return;
 
-    swap(v, left, (left + right)/2);
+    swap(&v[left], &v[(left + right)/2]);
     last = left;
     for (i = left + 1; i <= right; i++)
         if (v[i] < v[left])
-            swap(v, ++last, i);
-    swap(v, last, left);
+            swap(&v[++last], &v[i]);
+    swap(&v[last], &v[left]);
     qsort(v, left, last-1);
     qsort(v, last+1, right);
 }
 
 /* function for swap 2 element of array */
-void swap(int v[], int i, int j)
+void swap(int *px, int *py)
 {
     int temp;
-    temp = v[i];
-    v[i] = v[j];
-    v[j] = temp;
+    temp = *px;
+    *px = *py;
+    *py = temp;
 }
