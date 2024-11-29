@@ -26,7 +26,7 @@ int getint(int *pn)
     for (*pn = 0; isdigit(c); c = getch())
         *pn = 10 * *pn + (c - '0');
     *pn *= sign;
-    if (c == EOF)
+    if (c != EOF)
         ungetch(c);
     return c;
 }

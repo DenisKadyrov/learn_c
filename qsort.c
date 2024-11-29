@@ -34,7 +34,7 @@ void swap(char *v[], int i, int j)
 int strcmp(char *s, char *t)
 {
     for (; *s == *t; t++, s++)
-        if (*s = '\0')
+        if (*s == '\0')
             return 0;
     return *s - *t;
 }
