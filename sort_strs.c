@@ -6,6 +6,7 @@ Write sorted lines
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MAXLINES 5000
 
@@ -13,13 +14,18 @@ char *lineptr[MAXLINES];
 
 int readlines(char *lineptr[], int nlines);
 void writelines(char *lineptr[], int nlines);
-void qsort(char *lineptr[], int left, int right);
+void qsor(void *lineptr[], int left, int right, int (*comp)(void *, void *));
+int numcmp(char *t, char *s);
+int strcm(char *t, char *s);
 
-int main() 
+int main(int argc, char *argv[]) 
 {
     int nlines; // number of lines
+    int numeric = 0;
+    if (argc > 1 && strcm(argv[1], "-n") == 0)
+        numeric = 1;
     if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
-        qsort(lineptr, 0, nlines - 1);
+        qsor((void **) lineptr, 0, nlines - 1, (int (*)(void *, void *)) (numeric ? numcmp : strcm));
         writelines(lineptr, nlines);
         return 0;
     } else {
@@ -59,3 +65,23 @@ void writelines(char *lineptr[], int nlines)
         printf("%s\n", *lineptr++);
 }
 
+int strcm(char *s, char *t)
+{
+    for (; *s == *t; t++, s++)
+        if (*s == '\0')
+            return 0;
+    return *s - *t;
+}
+
+int numcmp(char *s1, char *s2)
+{
+    double v1, v2;
+    v1 = atof(s1);
+    v2 = atof(s2);
+    if (v1 < v2)
+        return -1;
+    else if (v1 > v2)
+        return 1;
+    else 
+        return 0;
+}
