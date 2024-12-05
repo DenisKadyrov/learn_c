@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define NKEY (sizeof keytab / sizeof keytab[0])
-#define MAXWORD 3
+#define MAXWORD 100
 
 
 struct key {
@@ -59,7 +59,7 @@ int main()
 
     for (n = 0; n < NKEY; n++)
         if (keytab[n].count > 0)
-            printf("%4d %s", keytab[n].count, keytab[n].word);
+            printf("%4d %s\n", keytab[n].count, keytab[n].word);
     return 0;
 }
 
@@ -92,9 +92,8 @@ int getword(char *word, int lim)
     
     while (isspace(c = getch()))
         ;
-    if (c == '/')
-        return EOF;
-        //*w++ = c;
+    if (c != EOF)
+        *w++ = c;
     if (!isalpha(c)) {
         *w = '\0';
         return c;
