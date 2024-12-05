@@ -64,7 +64,8 @@ int main()
 }
 
 /* binary search function */
-struct key *binsearch(char *word, struct key tab[], int n)
+struct key *
+binsearch(char *word, struct key tab[], int n)
 {
     int cond;
     struct key *low = &tab[0];
